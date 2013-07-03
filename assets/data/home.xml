@@ -1,0 +1,4 @@
+<root>
+	<post video="asset:///data/1.mp4" userimage="asset:///data/profile.jpg" username="Thorsten Heins" description="Mercedes-Petronas!" when="2m" />
+	<post video="asset:///data/2.mp4" userimage="asset:///data/profile.jpg" username="Bernard Bevers" description="Build the dam!" when="5h" />
+</root>

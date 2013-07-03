@@ -1,16 +1,32 @@
-// Default empty project template
 import bb.cascades 1.0
 
-// creates one page with a label
-Page {
-    Container {
-        layout: DockLayout {}
-        Label {
-            text: qsTr("#bbdevbe")
-            textStyle.base: SystemDefaults.TextStyles.BigText
-            verticalAlignment: VerticalAlignment.Center
-            horizontalAlignment: HorizontalAlignment.Center
+TabbedPane {
+    id: tabbedPane
+    showTabsOnActionBar: false
+    Tab {
+        title: 'Home'
+        content: Home {} 
+    }
+    Tab {
+        title: 'Explore'
+        content: Home {
         }
     }
+    Tab {
+        title: 'Activity'
+        content: Home {
+        }
+    }
+    Tab {
+        title: 'Profile'
+        content: Home {
+        }
+    }
+    Menu.definition: MenuDefinition {
+        actions: [
+            ActionItem {
+                title: "Settings"
+            }
+        ]
+    }
 }
-
