@@ -65,6 +65,9 @@
     
     <!--  The category where the application appears. Either core.games or core.media. -->
     <category>core.games</category>
+    <icon>
+       <image>icon2.png</image>
+    </icon>
     <configuration name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="arm/o.le-v7-g/Eniv" entry="true" type="Qnx/Elf">Eniv</asset>
@@ -84,17 +87,16 @@
     </configuration>
     
     <!--  The icon for the application -->
-    <icon>
-        <image>icon.png</image>
-    </icon>
 
-    <asset path="icon.png">icon.png</asset>
     <asset path="assets">assets</asset>
     
     <!-- Locale support -->
     <asset path="translations" dest="qm">
         <include name="*.qm"/>
     </asset>
+    <asset path="assets/img/icon_e.png">icon_e.png</asset>
+    <asset path="icon.png">icon.png</asset>
+    <asset path="icon2.png">icon2.png</asset>
     
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>

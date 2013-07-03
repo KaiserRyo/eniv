@@ -9,17 +9,17 @@ TabbedPane {
     }
     Tab {
         title: 'Explore'
-        content: Home {
+        content: Explore {
         }
     }
     Tab {
         title: 'Activity'
-        content: Home {
+        content: Activity {
         }
     }
     Tab {
         title: 'Profile'
-        content: Home {
+        content: Profile {
         }
     }
     Menu.definition: MenuDefinition {

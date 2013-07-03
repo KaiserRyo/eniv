@@ -1,0 +1,8 @@
+<root>
+	<item title="#loop" icon="loop.png" color="#ffAAB8D2"/>
+	<item title="#selfie" icon="selfie.png" color="#ff6F8BD0"/>
+	<item title="#remake" icon="remake.png" color="#ff9AD74E"/>
+	<item title="#cute" icon="cute.png" color="#ff563D89"/>
+	<item title="#magic" icon="magic.png" color="#ffD2B46F"/>
+	<item title="#howto" icon="howto.png" color="#ff2E61C3"/>
+</root>
