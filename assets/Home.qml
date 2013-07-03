@@ -72,11 +72,11 @@ Page {
                                     orientation: LayoutOrientation.LeftToRight
                                 }
 		                        Button {
-		                            text: "Like"
-		                            preferredWidth: preferredHeight
+                                    imageSource: "asset:///img/icon_like.png"
+                                    preferredWidth: preferredHeight
 		                        }
 		                        Button {
-		                            text: "Comment"
+                                    imageSource: "asset:///img/icon_comment.png"
                                     preferredWidth: preferredHeight
                                 }
 		                    }
