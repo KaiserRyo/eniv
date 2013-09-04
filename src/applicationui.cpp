@@ -14,8 +14,6 @@
 
 #include "applicationui.hpp"
 
-using namespace bb::cascades;
-
 ApplicationUI::ApplicationUI(bb::cascades::Application *app) : QObject(app), mCameraHandle(CAMERA_HANDLE_INVALID)
 {
     // create scene document from main.qml asset
@@ -70,6 +68,8 @@ void ApplicationUI::onWindowAttached(screen_window_t win, const QString &group, 
     screen_context_t screen_ctx;
     screen_get_window_property_pv(win, SCREEN_PROPERTY_CONTEXT, (void **)&screen_ctx);
     screen_flush_context(screen_ctx, 0);
+
+    camera_init_video_encoder();
 }
 
 int ApplicationUI::createViewfinder(camera_unit_t cameraUnit, const QString &group, const QString &id)
@@ -106,18 +106,34 @@ int ApplicationUI::createViewfinder(camera_unit_t cameraUnit, const QString &gro
 void ApplicationUI::onStartRecording() {
     qDebug() << "start recording";
 
-    char filename[CAMERA_ROLL_NAMELEN];
+
+
+    if (camera_start_encode(mCameraHandle,
+                            NULL,
+                            writeEncodedBuffer,
+                            NULL,
+                            NULL,
+                            NULL) == CAMERA_EOK) {
+
+        lblStatus->setText("Recording...");
+        lblStatus->setVisible(true);
+
+        return;
+    }
+
+    /*char filename[CAMERA_ROLL_NAMELEN];
     if (camera_roll_open_video(mCameraHandle,
                                &mVideoFileDescriptor,
                                filename,
                                sizeof(filename),
                                CAMERA_ROLL_VIDEO_FMT_DEFAULT) == CAMERA_EOK) {
         qDebug() << "opened " << filename;
-        if (camera_start_video(mCameraHandle,
-                               filename,
-                               NULL,
-                               NULL,
-                               NULL) == CAMERA_EOK) {
+        if (camera_start_encode(mCameraHandle,
+                                NULL,
+                                writeEncodedBuffer,
+                                NULL,
+                                cameraStatus,
+                                NULL) == CAMERA_EOK) {
             lblStatus->setText("Recording...");
             lblStatus->setVisible(true);
             return;
@@ -125,14 +141,27 @@ void ApplicationUI::onStartRecording() {
         qDebug() << "failed to start recording";
         camera_roll_close_video(mVideoFileDescriptor);
         mVideoFileDescriptor = -1;
-    }
+    }*/
 }
 
 void ApplicationUI::onStopRecording() {
     qDebug() << "stopped recording";
 
-    camera_stop_video(mCameraHandle);
-    camera_roll_close_video(mVideoFileDescriptor);
+    camera_stop_encode(mCameraHandle);
+    //camera_stop_video(mCameraHandle);
+    //camera_roll_close_video(mVideoFileDescriptor);
 
     lblStatus->setVisible(false);
+}
+
+void writeEncodedBuffer(camera_handle_t handle, camera_buffer_t* buffer, void* a) {
+    qDebug() << "writeEncodedBuffer";
+    qDebug() << buffer->frametimestamp;
+    if (buffer->frametype == CAMERA_FRAMETYPE_COMPRESSEDVIDEO) {
+        qDebug() << buffer->framedesc.compvid.bufsize;
+    }
+}
+
+void ApplicationUI::cameraStatus(camera_handle_t handle, camera_devstatus_t status, uint16_t temp, void * a) {
+    qDebug() << "cameraStatus";
 }

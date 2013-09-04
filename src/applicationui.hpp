@@ -41,7 +41,9 @@ private:
 
     void onStartRecording();
     void onStopRecording();
+
+    void cameraStatus(camera_handle_t, camera_devstatus_t, uint16_t, void*);
 };
 
-
+void writeEncodedBuffer(camera_handle_t, camera_buffer_t*, void*);
 #endif /* ApplicationUI_HPP_ */
